@@ -7,9 +7,9 @@ HIGH_DISCOUNT = 0.14
 PARTNER_DISCOUNT = 0.04
 PREPAYMENT_REQUIREMENT = 1500
 
-def calculate_bean_cost(bags_price: float, bags: int) -> float:
+def calculate_bean_cost(bag_price: float, bags: int) -> float:
     """Returns the bean cost before any discount (rule 1)."""
-    return bags_price * bags
+    return bag_price * bags
 
 def get_bulk_discount(bags: int, partner: bool = False) -> float:
     """Returns the discount rate as a decimal, so 9 percent is 0.09 (rules 2 and 3)."""
@@ -60,4 +60,3 @@ def largest_shipment(shipments: list) -> str:
 def format_shipment_line(buyer: str, total: float, prepayment: bool, pallet: bool) -> str:
     """Returns one line of the report, such as Uptown Bakery: $175.00 | prepayment: no | pallet: no. Each True/False value is shown as yes or no, and the amount always has two decimal places."""
     return f"{buyer}: ${total:.2f} | prepayment: {'yes' if prepayment else 'no'} | pallet: {'yes' if pallet else 'no'}"
-
