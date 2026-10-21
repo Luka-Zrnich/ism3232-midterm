@@ -1,6 +1,13 @@
 # part 3
 
-from business_rules import calculate_bean_cost, get_bulk_discount, calculate_shipment_total, requires_prepayment, needs_pallet, total_shipped, largest_shipment, format_shipment_line
+from business_rules import (
+    calculate_shipment_total,
+    format_shipment_line,
+    largest_shipment,
+    needs_pallet,
+    requires_prepayment,
+    total_shipped,
+)
 
 shipments = [
     {"buyer": "Uptown Bakery", "bag_price": 14.00, "bags": 10, "partner": False},
@@ -14,12 +21,18 @@ shipments = [
 ]
 
 for shipment in shipments:
-    total = calculate_shipment_total(shipment["bag_price"], shipment["bags"], shipment["partner"])
+    total = calculate_shipment_total(
+        shipment["bag_price"], shipment["bags"], shipment["partner"]
+    )
     prepayment = requires_prepayment(total)
     pallet = needs_pallet(shipment["bags"], total)
     print(format_shipment_line(shipment["buyer"], total, prepayment, pallet))
 print(f"Total shipped: ${total_shipped(shipments):.2f}")
-print(f"Average shipment: ${total_shipped(shipments)/len(shipments):,.2f}")
+print(f"Average shipment: ${total_shipped(shipments) / len(shipments):,.2f}")
 print(f"Largest shipment: {largest_shipment(shipments)}")
-print(f"Prepayments required: {sum(1 for shipment in shipments if requires_prepayment(calculate_shipment_total(shipment['bag_price'], shipment['bags'], shipment['partner'])))}")
-print(f"Pallets needed: {sum(1 for shipment in shipments if needs_pallet(shipment['bags'], calculate_shipment_total(shipment['bag_price'], shipment['bags'], shipment['partner'])))}")
+print(
+    f"Prepayments required: {sum(1 for shipment in shipments if requires_prepayment(calculate_shipment_total(shipment['bag_price'], shipment['bags'], shipment['partner'])))}"
+)
+print(
+    f"Pallets needed: {sum(1 for shipment in shipments if needs_pallet(shipment['bags'], calculate_shipment_total(shipment['bag_price'], shipment['bags'], shipment['partner'])))}"
+)
